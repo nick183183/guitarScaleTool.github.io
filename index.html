@@ -14,7 +14,7 @@
             <label for="tuning-select">Строй гитары: </label>
             <select id="tuning-select">
                 <optgroup label="Стандартные строи">
-                    <option value="eStandard">E Standard (E A D G B E)</option>
+                    <option value="eStandard" selected>E Standard (E A D G B E)</option>
                     <option value="ebStandard">Eb (D#) Standard</option>
                     <option value="dStandard">D Standard</option>
                     <option value="dbStandard">Db (C#) Standard</option>
@@ -41,63 +41,45 @@
             <select id="view-mode">
                 <option value="scale">Только гамма</option>
                 <option value="chord">Только аккорд</option>
-                <option value="combined">Совмещение (Гамма + Аккорд)</option>
+                <option value="combined" selected>Совмещение (Гамма + Аккорд)</option>
             </select>
         </div>
 
         <div class="controls scale-controls">
             <label for="scale-type">Гамма / Лад: </label>
             <select id="scale-type">
+                <option value="customScale">🎨 Своя гамма (Custom)</option>
                 <optgroup label="Основные">
                     <option value="major">Мажорная (Ionian)</option>
-                    <option value="minor">Минорная (Aeolian)</option>
+                    <option value="minorPentatonic" selected>Минорная пентатоника</option>
                     <option value="majorPentatonic">Мажорная пентатоника</option>
-                    <option value="minorPentatonic">Минорная пентатоника</option>
+                    <option value="minor">Минорная (Aeolian)</option>
                 </optgroup>
-                <optgroup label="Диатонические лады (Мажор)">
+                <optgroup label="Диатонические лады">
                     <option value="dorian">Дорийский (Dorian)</option>
                     <option value="phrygian">Фригийский (Phrygian)</option>
                     <option value="lydian">Лидийский (Lydian)</option>
                     <option value="mixolydian">Миксолидийский (Mixolydian)</option>
                     <option value="locrian">Локрийский (Locrian)</option>
                 </optgroup>
-                <optgroup label="Лады Мелодического минора">
+                <optgroup label="Другие лады и гаммы">
                     <option value="melodicMinor">Мелодический минор</option>
-                    <option value="dorianB2">Дорийский b2 (Phrygian #6)</option>
-                    <option value="lydianAug">Лидийский увеличенный (Lydian Aug)</option>
-                    <option value="lydianDom">Лидийский доминантовый (Lydian Dom)</option>
-                    <option value="mixolydianB6">Миксолидийский b6 (Hindu)</option>
-                    <option value="locrianNat6">Локрийский натуральная 6 (Half-Dim)</option>
-                    <option value="altered">Альтерированный (Super Locrian)</option>
-                </optgroup>
-                <optgroup label="Лады Гармонического минора">
                     <option value="harmonicMinor">Гармонический минор</option>
-                    <option value="locrianNat6H">Локрийский натуральная 6</option>
-                    <option value="ionianAugH">Ионийский увеличенный</option>
-                    <option value="dorianSharp4">Дорийский #4 (Lydian Minor)</option>
                     <option value="phrygianDom">Фригийский доминантовый</option>
-                    <option value="lydianSharp2">Лидийский #2</option>
-                    <option value="ultraLocrian">Ультра Локрийский (Altered Dom)</option>
-                </optgroup>
-                <optgroup label="Симметричные и Блюзовые">
+                    <option value="lydianDom">Лидийский доминантовый</option>
+                    <option value="altered">Альтерированный (Super Locrian)</option>
                     <option value="wholeTone">Целотонная (Whole Tone)</option>
                     <option value="diminishedHW">Уменьшенная (Half-Whole)</option>
-                    <option value="diminishedWH">Уменьшенная (Whole-Half)</option>
-                    <option value="majorBlues">Мажорный блюз</option>
                     <option value="minorBlues">Минорный блюз</option>
-                </optgroup>
-                <optgroup label="Экзотические">
-                    <option value="hungarianMinor">Венгерский минор</option>
-                    <option value="doubleHarmonic">Двойной гармонический (Византийская)</option>
-                    <option value="neapolitanMajor">Неаполитанский мажор</option>
+                    <option value="majorBlues">Мажорный блюз</option>
                 </optgroup>
             </select>
 
-            <label for="root-note">Тоника гаммы: </label>
+            <label for="root-note">Тоника: </label>
             <select id="root-note"></select>
             
             <label class="checkbox-label">
-                <input type="checkbox" id="show-degrees" checked>
+                <input type="checkbox" id="show-degrees">
                 Режим ступеней
             </label>
         </div>
@@ -108,8 +90,9 @@
 
             <label for="chord-type">Вид аккорда: </label>
             <select id="chord-type">
+                <option value="customChord">🎨 Свой аккорд (Custom)</option>
+                <option value="minor" selected>Минорный (Minor)</option>
                 <option value="major">Мажорный (Major)</option>
-                <option value="minor">Минорный (Minor)</option>
                 <option value="7">Доминантсептаккорд (7)</option>
                 <option value="maj7">Мажорный септаккорд (maj7)</option>
                 <option value="m7">Минорный септаккорд (m7)</option>
@@ -118,15 +101,13 @@
                 <option value="dim">Уменьшенный (dim)</option>
                 <option value="m7b5">Полууменьшенный (m7b5)</option>
                 <option value="add9">Мажорный с нона (add9)</option>
-                <option value="madd9">Минорный с нона (madd9)</option>
                 <option value="9">Доминант нона (9)</option>
-                <option value="aug">Увеличенный (aug)</option>
             </select>
             
-            <button id="clear-highlights">Сбросить выделение</button>
+            <button id="clear-highlights">Сбросить всё</button>
         </div>
         
-        <p class="hint">Кликни на ноту вне гаммы/аккорда, чтобы добавить её своим цветом. В режиме совмещения общие ноты окрашиваются наполовину.</p>
+        <p class="hint">Кликни на ноту, чтобы добавить/убрать её. В режиме "Своя гамма" первый клик задает тонику.</p>
         
         <div class="fretboard-wrapper">
             <div class="fretboard" id="fretboard">
@@ -146,6 +127,20 @@
                 </div>
             </div>
             <div class="fret-numbers" id="fret-numbers"></div>
+        </div>
+
+        <!-- ЛЕГЕНДА -->
+        <div class="legend">
+            <div class="legend-title">Легенда обозначений:</div>
+            <div class="legend-grid">
+                <div class="legend-item"><span class="legend-circle highlighted"></span> Тоника гаммы</div>
+                <div class="legend-item"><span class="legend-circle degree-note"></span> Нота гаммы</div>
+                <div class="legend-item"><span class="legend-circle chord-root"></span> Тоника аккорда</div>
+                <div class="legend-item"><span class="legend-circle chord-other"></span> Нота аккорда</div>
+                <div class="legend-item"><span class="legend-circle split-demo"></span> Нота в гамме И в аккорде</div>
+                <div class="legend-item"><span class="legend-circle custom-0"></span> Доп. нота (пользовательская)</div>
+                <div class="legend-item"><span class="legend-circle inactive"></span> Не используется</div>
+            </div>
         </div>
     </div>
 
