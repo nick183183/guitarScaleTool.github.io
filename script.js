@@ -18,14 +18,52 @@ document.addEventListener('DOMContentLoaded', () => {
     const NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
     const CHROMATIC_DEGREES = ['1', 'b2', '2', 'b3', '3', '4', 'b5', '5', 'b6', '6', 'b7', '7'];
     
+    // ПОЛНЫЙ СПИСОК ГАММ И ЛАДОВ
     const SCALE_DEGREES = {
+        // Основные
         major: { intervals: [0, 2, 4, 5, 7, 9, 11], labels: ['1', '2', '3', '4', '5', '6', '7'] },
         minor: { intervals: [0, 2, 3, 5, 7, 8, 10], labels: ['1', '2', 'b3', '4', '5', 'b6', 'b7'] },
         majorPentatonic: { intervals: [0, 2, 4, 7, 9], labels: ['1', '2', '3', '5', '6'] },
-        minorPentatonic: { intervals: [0, 3, 5, 7, 10], labels: ['1', 'b3', '4', '5', 'b7'] }
+        minorPentatonic: { intervals: [0, 3, 5, 7, 10], labels: ['1', 'b3', '4', '5', 'b7'] },
+        
+        // Диатонические лады
+        dorian: { intervals: [0, 2, 3, 5, 7, 9, 10], labels: ['1', '2', 'b3', '4', '5', '6', 'b7'] },
+        phrygian: { intervals: [0, 1, 3, 5, 7, 8, 10], labels: ['1', 'b2', 'b3', '4', '5', 'b6', 'b7'] },
+        lydian: { intervals: [0, 2, 4, 6, 7, 9, 11], labels: ['1', '2', '3', '#4', '5', '6', '7'] },
+        mixolydian: { intervals: [0, 2, 4, 5, 7, 9, 10], labels: ['1', '2', '3', '4', '5', '6', 'b7'] },
+        locrian: { intervals: [0, 1, 3, 5, 6, 8, 10], labels: ['1', 'b2', 'b3', '4', 'b5', 'b6', 'b7'] },
+        
+        // Лады Мелодического минора
+        melodicMinor: { intervals: [0, 2, 3, 5, 7, 9, 11], labels: ['1', '2', 'b3', '4', '5', '6', '7'] },
+        dorianB2: { intervals: [0, 1, 3, 5, 7, 9, 10], labels: ['1', 'b2', 'b3', '4', '5', '6', 'b7'] },
+        lydianAug: { intervals: [0, 2, 4, 6, 8, 9, 11], labels: ['1', '2', '3', '#4', '#5', '6', '7'] },
+        lydianDom: { intervals: [0, 2, 4, 6, 7, 9, 10], labels: ['1', '2', '3', '#4', '5', '6', 'b7'] },
+        mixolydianB6: { intervals: [0, 2, 4, 5, 7, 8, 10], labels: ['1', '2', '3', '4', '5', 'b6', 'b7'] },
+        locrianNat6: { intervals: [0, 2, 3, 5, 6, 8, 10], labels: ['1', '2', 'b3', '4', 'b5', 'b6', 'b7'] },
+        altered: { intervals: [0, 1, 3, 4, 6, 8, 10], labels: ['1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7'] },
+        
+        // Лады Гармонического минора
+        harmonicMinor: { intervals: [0, 2, 3, 5, 7, 8, 11], labels: ['1', '2', 'b3', '4', '5', 'b6', '7'] },
+        locrianNat6H: { intervals: [0, 1, 3, 5, 6, 9, 10], labels: ['1', 'b2', 'b3', '4', 'b5', '6', 'b7'] },
+        ionianAugH: { intervals: [0, 2, 4, 5, 8, 9, 11], labels: ['1', '2', '3', '4', '#5', '6', '7'] },
+        dorianSharp4: { intervals: [0, 2, 3, 6, 7, 9, 10], labels: ['1', '2', 'b3', '#4', '5', '6', 'b7'] },
+        phrygianDom: { intervals: [0, 1, 4, 5, 7, 8, 10], labels: ['1', 'b2', '3', '4', '5', 'b6', 'b7'] },
+        lydianSharp2: { intervals: [0, 3, 4, 6, 7, 9, 11], labels: ['1', '#2', '3', '#4', '5', '6', '7'] },
+        ultraLocrian: { intervals: [0, 1, 3, 4, 6, 8, 10], labels: ['1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7'] },
+        
+        // Симметричные и Блюзовые
+        wholeTone: { intervals: [0, 2, 4, 6, 8, 10], labels: ['1', '2', '3', '#4', '#5', 'b7'] },
+        diminishedHW: { intervals: [0, 1, 3, 4, 6, 7, 9, 10], labels: ['1', 'b2', 'b3', '3', '#4', '5', '6', 'b7'] },
+        diminishedWH: { intervals: [0, 2, 3, 5, 6, 8, 9, 11], labels: ['1', '2', 'b3', '4', 'b5', '#5', '6', '7'] },
+        majorBlues: { intervals: [0, 2, 3, 4, 7, 9], labels: ['1', '2', 'b3', '3', '5', '6'] },
+        minorBlues: { intervals: [0, 3, 5, 6, 7, 10], labels: ['1', 'b3', '4', 'b5', '5', 'b7'] },
+        
+        // Экзотические
+        hungarianMinor: { intervals: [0, 2, 3, 6, 7, 8, 11], labels: ['1', '2', 'b3', '#4', '5', 'b6', '7'] },
+        doubleHarmonic: { intervals: [0, 1, 4, 5, 7, 8, 11], labels: ['1', 'b2', '3', '4', '5', 'b6', '7'] },
+        neapolitanMajor: { intervals: [0, 1, 3, 5, 7, 9, 11], labels: ['1', 'b2', 'b3', '4', '5', '6', '7'] }
     };
 
-    // Интервалы аккордов (отсортированы по популярности)
     const CHORD_TYPES = {
         major: [0, 4, 7],
         minor: [0, 3, 7],
@@ -85,7 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const clickedIndex = parseInt(circle.dataset.noteIndex);
                 const viewMode = viewModeSelect.value;
                 
-                // Определяем, относится ли нота к текущим активным наборам
                 let isInActiveSet = false;
                 if (viewMode === 'scale' || viewMode === 'combined') {
                     const scaleType = scaleTypeSelect.value;
@@ -151,12 +188,11 @@ document.addEventListener('DOMContentLoaded', () => {
         updateHighlights();
     }
 
-    // 4. Центральная функция обновления с поддержкой 3 режимов и градиентов
+    // 4. Центральная функция обновления
     function updateHighlights() {
         const viewMode = viewModeSelect.value;
         const showDegrees = showDegreesCheckbox.checked;
         
-        // Данные гаммы
         const scaleType = scaleTypeSelect.value;
         const scaleRootIndex = parseInt(rootNoteSelect.value);
         let scaleIntervals = [];
@@ -164,15 +200,14 @@ document.addEventListener('DOMContentLoaded', () => {
             scaleIntervals = SCALE_DEGREES[scaleType].intervals.map(i => (scaleRootIndex + i) % 12);
         }
 
-        // Данные аккорда
         const chordType = chordTypeSelect.value;
         const chordRootIndex = parseInt(chordRootSelect.value);
         const chordIntervals = CHORD_TYPES[chordType].map(i => (chordRootIndex + i) % 12);
 
         document.querySelectorAll('.note-circle').forEach(circle => {
             const noteIndex = parseInt(circle.dataset.noteIndex);
-            circle.className = 'note-circle'; // Полный сброс классов
-            circle.style.background = ''; // Сброс инлайн-стилей (градиентов)
+            circle.className = 'note-circle'; 
+            circle.style.background = ''; 
 
             const interval = (noteIndex - scaleRootIndex + 12) % 12;
             const degreeLabel = CHROMATIC_DEGREES[interval];
@@ -203,30 +238,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 let leftColor = null;
                 let rightColor = null;
 
-                // Левая половина (Гамма)
                 if (isScaleCustom && !isHidden) leftColor = CUSTOM_COLORS[addedNotes.get(noteIndex)];
-                else if (isScaleRoot && !isHidden) leftColor = '#e74c3c'; // Красный
-                else if (isScaleOther && !isHidden) leftColor = 'rgba(255, 255, 255, 0.9)'; // Белый
+                else if (isScaleRoot && !isHidden) leftColor = '#e74c3c'; 
+                else if (isScaleOther && !isHidden) leftColor = 'rgba(255, 255, 255, 0.9)'; 
 
-                // Правая половина (Аккорд)
-                if (isChordRoot && !isHidden) rightColor = '#f1c40f'; // Желтый
-                else if (isChordOther && !isHidden) rightColor = '#95a5a6'; // Серый
+                if (isChordRoot && !isHidden) rightColor = '#f1c40f'; 
+                else if (isChordOther && !isHidden) rightColor = '#95a5a6'; 
 
                 if (leftColor && rightColor) {
-                    // СОВМЕЩЕНИЕ: Градиент 50/50
                     circle.style.background = `linear-gradient(to right, ${leftColor} 50%, ${rightColor} 50%)`;
                     circle.classList.add('split-note');
                 } else if (leftColor) {
-                    // Только гамма
                     if (isScaleCustom) circle.classList.add(`custom-${addedNotes.get(noteIndex)}`);
                     else if (isScaleRoot) circle.classList.add('highlighted');
                     else if (isScaleOther) circle.classList.add('degree-note');
                 } else if (rightColor) {
-                    // Только аккорд
                     if (isChordRoot) circle.classList.add('chord-root');
                     else if (isChordOther) circle.classList.add('chord-other');
                 } else {
-                    // Ни то, ни другое
                     circle.classList.add('inactive');
                 }
             }

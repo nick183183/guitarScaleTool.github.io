@@ -36,7 +36,6 @@
             </select>
         </div>
 
-        <!-- Переключатель режимов -->
         <div class="controls mode-controls">
             <label>Режим отображения: </label>
             <select id="view-mode">
@@ -46,27 +45,63 @@
             </select>
         </div>
 
-        <!-- Конфигурация гаммы -->
         <div class="controls scale-controls">
-            <label for="scale-type">Гамма: </label>
+            <label for="scale-type">Гамма / Лад: </label>
             <select id="scale-type">
-                <option value="none">-- Не выбрано --</option>
-                <option value="major" selected>Мажорная (Major)</option>
-                <option value="minor">Минорная (Natural Minor)</option>
-                <option value="majorPentatonic">Мажорная пентатоника</option>
-                <option value="minorPentatonic">Минорная пентатоника</option>
+                <optgroup label="Основные">
+                    <option value="major">Мажорная (Ionian)</option>
+                    <option value="minor">Минорная (Aeolian)</option>
+                    <option value="majorPentatonic">Мажорная пентатоника</option>
+                    <option value="minorPentatonic">Минорная пентатоника</option>
+                </optgroup>
+                <optgroup label="Диатонические лады (Мажор)">
+                    <option value="dorian">Дорийский (Dorian)</option>
+                    <option value="phrygian">Фригийский (Phrygian)</option>
+                    <option value="lydian">Лидийский (Lydian)</option>
+                    <option value="mixolydian">Миксолидийский (Mixolydian)</option>
+                    <option value="locrian">Локрийский (Locrian)</option>
+                </optgroup>
+                <optgroup label="Лады Мелодического минора">
+                    <option value="melodicMinor">Мелодический минор</option>
+                    <option value="dorianB2">Дорийский b2 (Phrygian #6)</option>
+                    <option value="lydianAug">Лидийский увеличенный (Lydian Aug)</option>
+                    <option value="lydianDom">Лидийский доминантовый (Lydian Dom)</option>
+                    <option value="mixolydianB6">Миксолидийский b6 (Hindu)</option>
+                    <option value="locrianNat6">Локрийский натуральная 6 (Half-Dim)</option>
+                    <option value="altered">Альтерированный (Super Locrian)</option>
+                </optgroup>
+                <optgroup label="Лады Гармонического минора">
+                    <option value="harmonicMinor">Гармонический минор</option>
+                    <option value="locrianNat6H">Локрийский натуральная 6</option>
+                    <option value="ionianAugH">Ионийский увеличенный</option>
+                    <option value="dorianSharp4">Дорийский #4 (Lydian Minor)</option>
+                    <option value="phrygianDom">Фригийский доминантовый</option>
+                    <option value="lydianSharp2">Лидийский #2</option>
+                    <option value="ultraLocrian">Ультра Локрийский (Altered Dom)</option>
+                </optgroup>
+                <optgroup label="Симметричные и Блюзовые">
+                    <option value="wholeTone">Целотонная (Whole Tone)</option>
+                    <option value="diminishedHW">Уменьшенная (Half-Whole)</option>
+                    <option value="diminishedWH">Уменьшенная (Whole-Half)</option>
+                    <option value="majorBlues">Мажорный блюз</option>
+                    <option value="minorBlues">Минорный блюз</option>
+                </optgroup>
+                <optgroup label="Экзотические">
+                    <option value="hungarianMinor">Венгерский минор</option>
+                    <option value="doubleHarmonic">Двойной гармонический (Византийская)</option>
+                    <option value="neapolitanMajor">Неаполитанский мажор</option>
+                </optgroup>
             </select>
 
             <label for="root-note">Тоника гаммы: </label>
             <select id="root-note"></select>
             
             <label class="checkbox-label">
-                <input type="checkbox" id="show-degrees">
+                <input type="checkbox" id="show-degrees" checked>
                 Режим ступеней
             </label>
         </div>
 
-        <!-- Конфигурация аккорда -->
         <div class="controls chord-controls">
             <label for="chord-root-note">Тоника аккорда: </label>
             <select id="chord-root-note"></select>
