@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Визуализация гитарного грифа</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <h1>Гитарный гриф (24 лада)</h1>
+        
+        <div class="controls">
+            <label for="tuning-select">Строй гитары: </label>
+            <select id="tuning-select">
+                <optgroup label="Стандартные строи">
+                    <option value="eStandard">E Standard (E A D G B E)</option>
+                    <option value="ebStandard">Eb (D#) Standard</option>
+                    <option value="dStandard">D Standard</option>
+                    <option value="dbStandard">Db (C#) Standard</option>
+                    <option value="cStandard">C Standard</option>
+                    <option value="bStandard">B Standard</option>
+                    <option value="bbStandard">Bb (A#) Standard</option>
+                    <option value="aStandard">A Standard</option>
+                </optgroup>
+                <optgroup label="Drop строи">
+                    <option value="dropD">Drop D</option>
+                    <option value="dropDb">Drop Db (C#)</option>
+                    <option value="dropC">Drop C</option>
+                    <option value="dropB">Drop B</option>
+                    <option value="dropBb">Drop Bb (A#)</option>
+                    <option value="dropA">Drop A</option>
+                    <option value="dropAb">Drop Ab (G#)</option>
+                    <option value="dropG">Drop G</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <!-- Переключатель режимов -->
+        <div class="controls mode-controls">
+            <label>Режим отображения: </label>
+            <select id="view-mode">
+                <option value="scale">Только гамма</option>
+                <option value="chord">Только аккорд</option>
+                <option value="combined">Совмещение (Гамма + Аккорд)</option>
+            </select>
+        </div>
+
+        <!-- Конфигурация гаммы -->
+        <div class="controls scale-controls">
+            <label for="scale-type">Гамма: </label>
+            <select id="scale-type">
+                <option value="none">-- Не выбрано --</option>
+                <option value="major" selected>Мажорная (Major)</option>
+                <option value="minor">Минорная (Natural Minor)</option>
+                <option value="majorPentatonic">Мажорная пентатоника</option>
+                <option value="minorPentatonic">Минорная пентатоника</option>
+            </select>
+
+            <label for="root-note">Тоника гаммы: </label>
+            <select id="root-note"></select>
+            
+            <label class="checkbox-label">
+                <input type="checkbox" id="show-degrees">
+                Режим ступеней
+            </label>
+        </div>
+
+        <!-- Конфигурация аккорда -->
+        <div class="controls chord-controls">
+            <label for="chord-root-note">Тоника аккорда: </label>
+            <select id="chord-root-note"></select>
+
+            <label for="chord-type">Вид аккорда: </label>
+            <select id="chord-type">
+                <option value="major">Мажорный (Major)</option>
+                <option value="minor">Минорный (Minor)</option>
+                <option value="7">Доминантсептаккорд (7)</option>
+                <option value="maj7">Мажорный септаккорд (maj7)</option>
+                <option value="m7">Минорный септаккорд (m7)</option>
+                <option value="sus4">Задержанный кварт (sus4)</option>
+                <option value="sus2">Задержанный секунда (sus2)</option>
+                <option value="dim">Уменьшенный (dim)</option>
+                <option value="m7b5">Полууменьшенный (m7b5)</option>
+                <option value="add9">Мажорный с нона (add9)</option>
+                <option value="madd9">Минорный с нона (madd9)</option>
+                <option value="9">Доминант нона (9)</option>
+                <option value="aug">Увеличенный (aug)</option>
+            </select>
+            
+            <button id="clear-highlights">Сбросить выделение</button>
+        </div>
+        
+        <p class="hint">Кликни на ноту вне гаммы/аккорда, чтобы добавить её своим цветом. В режиме совмещения общие ноты окрашиваются наполовину.</p>
+        
+        <div class="fretboard-wrapper">
+            <div class="fretboard" id="fretboard">
+                <div class="fret-lines"></div>
+                <div class="nut"></div>
+                <div class="strings-container">
+                    <div class="string"></div><div class="string"></div><div class="string"></div>
+                    <div class="string"></div><div class="string"></div><div class="string"></div>
+                </div>
+                <div class="inlays-container">
+                    <div class="inlay fret-3"></div><div class="inlay fret-5"></div>
+                    <div class="inlay fret-7"></div><div class="inlay fret-9"></div>
+                    <div class="inlay fret-12-top"></div><div class="inlay fret-12-bottom"></div>
+                    <div class="inlay fret-15"></div><div class="inlay fret-17"></div>
+                    <div class="inlay fret-19"></div><div class="inlay fret-21"></div>
+                    <div class="inlay fret-24-top"></div><div class="inlay fret-24-bottom"></div>
+                </div>
+            </div>
+            <div class="fret-numbers" id="fret-numbers"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

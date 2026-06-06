@@ -1,0 +1,331 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #1e272e;
+    color: #ecf0f1;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.app-container {
+    text-align: center;
+    max-width: 100%;
+}
+
+.controls {
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.controls label {
+    font-size: 16px;
+}
+
+select {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #7f8c8d;
+    background-color: #2d3436;
+    color: #ecf0f1;
+    cursor: pointer;
+    outline: none;
+}
+
+select:focus {
+    border-color: #f1c40f;
+}
+
+select optgroup {
+    background-color: #2d3436;
+    color: #f1c40f;
+    font-weight: bold;
+}
+
+select option {
+    background-color: #2d3436;
+    color: #ecf0f1;
+    font-weight: normal;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+    user-select: none;
+}
+
+.checkbox-label input {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    cursor: pointer;
+    accent-color: #f1c40f;
+}
+
+#clear-highlights {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#clear-highlights:hover {
+    background-color: #c0392b;
+}
+
+.hint {
+    color: #bdc3c7;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.fretboard-wrapper {
+    overflow-x: auto;
+    padding: 20px;
+    background: #2d3436;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.fretboard {
+    display: grid;
+    grid-template-rows: repeat(6, 40px);
+    grid-template-columns: 60px repeat(24, 50px);
+    background: linear-gradient(to bottom, #4e342e, #3e2723, #4e342e);
+    border: 4px solid #2c2c2c;
+    border-radius: 4px;
+    position: relative;
+    user-select: none;
+}
+
+.fret-lines {
+    position: absolute;
+    top: 0;
+    left: 60px;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 48px,
+        #bdc3c7 48px,
+        #bdc3c7 50px
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+.nut {
+    position: absolute;
+    top: 0;
+    left: 59px;
+    width: 2px;
+    bottom: 0;
+    background: #ecf0f1;
+    z-index: 2;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.strings-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.string {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to bottom, #dcdde1, #7f8c8d);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.string:nth-child(1) { top: 20px; height: 1px; }
+.string:nth-child(2) { top: 60px; height: 1.5px; }
+.string:nth-child(3) { top: 100px; height: 2px; }
+.string:nth-child(4) { top: 140px; height: 2.5px; }
+.string:nth-child(5) { top: 180px; height: 3px; }
+.string:nth-child(6) { top: 220px; height: 4px; }
+
+.inlays-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.inlay {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: #dcdde1;
+    border-radius: 50%;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    transform: translate(-50%, -50%);
+}
+
+.inlay.fret-3 { left: 185px; top: 50%; }
+.inlay.fret-5 { left: 285px; top: 50%; }
+.inlay.fret-7 { left: 385px; top: 50%; }
+.inlay.fret-9 { left: 485px; top: 50%; }
+.inlay.fret-12-top { left: 635px; top: 30%; }
+.inlay.fret-12-bottom { left: 635px; top: 70%; }
+.inlay.fret-15 { left: 785px; top: 50%; }
+.inlay.fret-17 { left: 885px; top: 50%; }
+.inlay.fret-19 { left: 985px; top: 50%; }
+.inlay.fret-21 { left: 1085px; top: 50%; }
+.inlay.fret-24-top { left: 1235px; top: 30%; }
+.inlay.fret-24-bottom { left: 1235px; top: 70%; }
+
+.note-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+}
+
+.note-circle {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(20, 20, 20, 0.219);
+    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Базовый ховер */
+.note-circle:hover {
+    background: rgba(60, 60, 60, 0.8) !important;
+    border-color: #f1c40f !important;
+    color: #ecf0f1 !important;
+    transform: scale(1.15) !important;
+    box-shadow: 0 0 8px rgba(241, 196, 15, 0.4);
+    z-index: 5 !important;
+}
+
+/* Красный для тоники гаммы */
+.note-circle.highlighted {
+    background: rgba(231, 76, 60, 0.85);
+    border-color: #ff7675;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(231, 76, 60, 0.9);
+    transform: scale(1.15);
+    z-index: 4;
+}
+
+/* Белый для остальных нот гаммы */
+.note-circle.degree-note {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: #ffffff;
+    color: #1e272e;
+    text-shadow: none;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    transform: scale(1.15);
+    z-index: 4;
+}
+
+/* Неактивные ноты */
+.note-circle.inactive {
+    background: rgba(30, 30, 30, 0.6);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #7f8c8d;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    transform: scale(1.0);
+}
+
+/* Пул цветов для пользовательских нот */
+.note-circle.custom-0 { background: rgba(52, 152, 219, 0.85); border-color: #3498db; box-shadow: 0 0 15px rgba(52, 152, 219, 0.9); color: #fff; transform: scale(1.15); z-index: 4; }
+.note-circle.custom-1 { background: rgba(46, 204, 113, 0.85); border-color: #2ecc71; box-shadow: 0 0 15px rgba(46, 204, 113, 0.9); color: #fff; transform: scale(1.15); z-index: 4; }
+.note-circle.custom-2 { background: rgba(155, 89, 182, 0.85); border-color: #9b59b6; box-shadow: 0 0 15px rgba(155, 89, 182, 0.9); color: #fff; transform: scale(1.15); z-index: 4; }
+.note-circle.custom-3 { background: rgba(230, 126, 34, 0.85); border-color: #e67e22; box-shadow: 0 0 15px rgba(230, 126, 34, 0.9); color: #fff; transform: scale(1.15); z-index: 4; }
+.note-circle.custom-4 { background: rgba(0, 206, 201, 0.85); border-color: #00cec9; box-shadow: 0 0 15px rgba(0, 206, 201, 0.9); color: #fff; transform: scale(1.15); z-index: 4; }
+.note-circle.custom-5 { background: rgba(253, 121, 168, 0.85); border-color: #fd79a8; box-shadow: 0 0 15px rgba(253, 121, 168, 0.9); color: #fff; transform: scale(1.15); z-index: 4; }
+
+/* НОВЫЕ КЛАССЫ ДЛЯ АККОРДОВ */
+.note-circle.chord-root {
+    background: #f1c40f !important;
+    border-color: #f39c12 !important;
+    color: #1e272e !important;
+    text-shadow: none !important;
+    transform: scale(1.15);
+    z-index: 4;
+}
+
+.note-circle.chord-other {
+    background: #95a5a6 !important;
+    border-color: #bdc3c7 !important;
+    color: #1e272e !important;
+    text-shadow: none !important;
+    transform: scale(1.15);
+    z-index: 4;
+}
+
+/* СПЕЦИАЛЬНЫЙ КЛАСС ДЛЯ СОВМЕЩЕННОГО РЕЖИМА (ГРАДИЕНТ) */
+.note-circle.split-note {
+    color: #fff !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95) !important;
+    transform: scale(1.15);
+    z-index: 4;
+}
+
+/* При наведении на split-note сохраняем градиент, но добавляем свечение */
+.note-circle.split-note:hover {
+    background: inherit !important; 
+    border-color: #f1c40f !important;
+    box-shadow: 0 0 12px rgba(241, 196, 15, 0.8) !important;
+}
+
+.fret-numbers {
+    display: grid;
+    grid-template-columns: 60px repeat(24, 50px);
+    margin-top: 8px;
+    color: #bdc3c7;
+    font-size: 12px;
+}
+
+.fret-num {
+    font-size: 15px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fret-num.open {
+    font-weight: bold;
+    color: #ecf0f1;
+}
