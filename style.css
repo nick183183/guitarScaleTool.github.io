@@ -4,6 +4,11 @@
     padding: 0;
 }
 
+/* Улучшение реакции на касания */
+html {
+    touch-action: manipulation;
+}
+
 body {
     background-color: #1e272e;
     color: #ecf0f1;
@@ -20,7 +25,7 @@ body {
 }
 
 .controls {
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -104,6 +109,9 @@ select option {
     background: #2d3436;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    /* Скроллбар для красоты */
+    scrollbar-width: thin;
+    scrollbar-color: #7f8c8d #2d3436;
 }
 
 .fretboard {
@@ -115,6 +123,8 @@ select option {
     border-radius: 4px;
     position: relative;
     user-select: none;
+    /* Минимальная ширина, чтобы не сжималось в кашу на ПК */
+    min-width: max-content; 
 }
 
 .fret-lines {
@@ -190,6 +200,7 @@ select option {
     transform: translate(-50%, -50%);
 }
 
+/* Позиции точек для десктопа */
 .inlay.fret-3 { left: 185px; top: 50%; }
 .inlay.fret-5 { left: 285px; top: 50%; }
 .inlay.fret-7 { left: 385px; top: 50%; }
@@ -228,7 +239,6 @@ select option {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Базовый ховер */
 .note-circle:hover {
     background: rgba(60, 60, 60, 0.8) !important;
     border-color: #f1c40f !important;
@@ -238,7 +248,6 @@ select option {
     z-index: 5 !important;
 }
 
-/* Красный для тоники гаммы */
 .note-circle.highlighted {
     background: rgba(231, 76, 60, 0.85);
     border-color: #ff7675;
@@ -248,7 +257,6 @@ select option {
     z-index: 4;
 }
 
-/* Белый для остальных нот гаммы */
 .note-circle.degree-note {
     background: rgba(255, 255, 255, 0.9);
     border-color: #ffffff;
@@ -259,7 +267,6 @@ select option {
     z-index: 4;
 }
 
-/* Неактивные ноты */
 .note-circle.inactive {
     background: rgba(30, 30, 30, 0.6);
     border-color: rgba(255, 255, 255, 0.15);
@@ -268,7 +275,6 @@ select option {
     transform: scale(1.0);
 }
 
-/* Пул цветов для пользовательских нот */
 .note-circle.custom-0 { background: rgba(52, 152, 219, 0.85); border-color: #3498db; box-shadow: 0 0 15px rgba(52, 152, 219, 0.9); color: #fff; transform: scale(1.15); z-index: 4; }
 .note-circle.custom-1 { background: rgba(46, 204, 113, 0.85); border-color: #2ecc71; box-shadow: 0 0 15px rgba(46, 204, 113, 0.9); color: #fff; transform: scale(1.15); z-index: 4; }
 .note-circle.custom-2 { background: rgba(155, 89, 182, 0.85); border-color: #9b59b6; box-shadow: 0 0 15px rgba(155, 89, 182, 0.9); color: #fff; transform: scale(1.15); z-index: 4; }
@@ -276,26 +282,9 @@ select option {
 .note-circle.custom-4 { background: rgba(0, 206, 201, 0.85); border-color: #00cec9; box-shadow: 0 0 15px rgba(0, 206, 201, 0.9); color: #fff; transform: scale(1.15); z-index: 4; }
 .note-circle.custom-5 { background: rgba(253, 121, 168, 0.85); border-color: #fd79a8; box-shadow: 0 0 15px rgba(253, 121, 168, 0.9); color: #fff; transform: scale(1.15); z-index: 4; }
 
-/* НОВЫЕ КЛАССЫ ДЛЯ АККОРДОВ */
-.note-circle.chord-root {
-    background: #f1c40f !important;
-    border-color: #f39c12 !important;
-    color: #1e272e !important;
-    text-shadow: none !important;
-    transform: scale(1.15);
-    z-index: 4;
-}
+.note-circle.chord-root { background: #f1c40f !important; border-color: #f39c12 !important; color: #1e272e !important; text-shadow: none !important; transform: scale(1.15); z-index: 4; }
+.note-circle.chord-other { background: #95a5a6 !important; border-color: #bdc3c7 !important; color: #1e272e !important; text-shadow: none !important; transform: scale(1.15); z-index: 4; }
 
-.note-circle.chord-other {
-    background: #95a5a6 !important;
-    border-color: #bdc3c7 !important;
-    color: #1e272e !important;
-    text-shadow: none !important;
-    transform: scale(1.15);
-    z-index: 4;
-}
-
-/* СПЕЦИАЛЬНЫЙ КЛАСС ДЛЯ СОВМЕЩЕННОГО РЕЖИМА (ГРАДИЕНТ) */
 .note-circle.split-note {
     color: #fff !important;
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95) !important;
@@ -303,7 +292,6 @@ select option {
     z-index: 4;
 }
 
-/* При наведении на split-note сохраняем градиент, но добавляем свечение */
 .note-circle.split-note:hover {
     background: inherit !important; 
     border-color: #f1c40f !important;
@@ -328,4 +316,140 @@ select option {
 .fret-num.open {
     font-weight: bold;
     color: #ecf0f1;
+}
+
+/* =========================================
+   АДАПТАЦИЯ ПОД МОБИЛЬНЫЕ УСТРОЙСТВА
+   ========================================= */
+
+/* Планшеты и маленькие ноутбуки */
+@media (max-width: 850px) {
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .controls label, .controls select, .controls button {
+        width: 100%;
+        margin: 4px 0;
+    }
+    .checkbox-label {
+        justify-content: center;
+    }
+    
+    /* Уменьшаем гриф */
+    .fretboard {
+        grid-template-rows: repeat(6, 35px);
+        grid-template-columns: 45px repeat(24, 40px);
+    }
+    
+    .fret-lines {
+        left: 45px;
+        background: repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 38px,
+            #bdc3c7 38px,
+            #bdc3c7 40px
+        );
+    }
+    
+    .nut {
+        left: 44px;
+    }
+    
+    /* Пересчет струн для высоты ряда 35px */
+    .string:nth-child(1) { top: 17.5px; }
+    .string:nth-child(2) { top: 52.5px; }
+    .string:nth-child(3) { top: 87.5px; }
+    .string:nth-child(4) { top: 122.5px; }
+    .string:nth-child(5) { top: 157.5px; }
+    .string:nth-child(6) { top: 192.5px; }
+    
+    /* Пересчет точек для ширины лада 40px и отступа 45px */
+    /* Формула: 45 + (N*40) - 20 */
+    .inlay.fret-3 { left: 145px; }
+    .inlay.fret-5 { left: 225px; }
+    .inlay.fret-7 { left: 305px; }
+    .inlay.fret-9 { left: 405px; }
+    .inlay.fret-12-top { left: 505px; }
+    .inlay.fret-12-bottom { left: 505px; }
+    .inlay.fret-15 { left: 625px; }
+    .inlay.fret-17 { left: 705px; }
+    .inlay.fret-19 { left: 785px; }
+    .inlay.fret-21 { left: 865px; }
+    .inlay.fret-24-top { left: 985px; }
+    .inlay.fret-24-bottom { left: 985px; }
+    
+    .note-circle {
+        width: 28px;
+        height: 28px;
+        font-size: 13px;
+    }
+    
+    .fret-numbers {
+        grid-template-columns: 45px repeat(24, 40px);
+        font-size: 12px;
+    }
+}
+
+/* Смартфоны */
+@media (max-width: 480px) {
+    .app-container {
+        padding: 10px;
+    }
+    h1 { font-size: 20px; }
+    .hint { font-size: 12px; }
+    
+    .fretboard {
+        grid-template-rows: repeat(6, 30px);
+        grid-template-columns: 40px repeat(24, 32px);
+    }
+    
+    .fret-lines {
+        left: 40px;
+        background: repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 30px,
+            #bdc3c7 30px,
+            #bdc3c7 32px
+        );
+    }
+    
+    .nut { left: 39px; }
+    
+    /* Пересчет струн для высоты ряда 30px */
+    .string:nth-child(1) { top: 15px; }
+    .string:nth-child(2) { top: 45px; }
+    .string:nth-child(3) { top: 75px; }
+    .string:nth-child(4) { top: 105px; }
+    .string:nth-child(5) { top: 135px; }
+    .string:nth-child(6) { top: 165px; }
+    
+    /* Пересчет точек для ширины лада 32px и отступа 40px */
+    /* Формула: 40 + (N*32) - 16 */
+    .inlay.fret-3 { left: 120px; }
+    .inlay.fret-5 { left: 184px; }
+    .inlay.fret-7 { left: 248px; }
+    .inlay.fret-9 { left: 312px; }
+    .inlay.fret-12-top { left: 408px; }
+    .inlay.fret-12-bottom { left: 408px; }
+    .inlay.fret-15 { left: 504px; }
+    .inlay.fret-17 { left: 568px; }
+    .inlay.fret-19 { left: 632px; }
+    .inlay.fret-21 { left: 696px; }
+    .inlay.fret-24-top { left: 792px; }
+    .inlay.fret-24-bottom { left: 792px; }
+    
+    .note-circle {
+        width: 24px;
+        height: 24px;
+        font-size: 11px;
+        border-width: 1px;
+    }
+    
+    .fret-numbers {
+        grid-template-columns: 40px repeat(24, 32px);
+        font-size: 10px;
+    }
 }
